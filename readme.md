@@ -5,6 +5,7 @@ This repository is a step-by-step guide for anyone, regardless of computer, Linu
 
 $~$
 $~$
+
 ## Overview
 There are two main ways to pull phenotype data from the UK Biobank:
 
@@ -29,6 +30,8 @@ Example: `p4080_i0_a2` means field ID 4080, the first visit (i0), and the third 
 
 More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?cd=data_field).
 
+$~$
+$~$
 
 > [!NOTE]
 > ## Prerequisites 🚀
@@ -44,14 +47,20 @@ More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?
 > 6. **Dockerhub Username**: [Create an account here](https://hub.docker.com/signup).
 > 7. **Create Docker Image on Dockerhub**: You will need this to store and share your Docker image.
 
+$~$
+$~$
 
 ## Step-by-Step Instructions 📋
 
+$~$
+$~$
 
 ### Step 1: Install Docker Desktop and Create Dockerhub Username
 - Download and install Docker Desktop: [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 - Create a Dockerhub username: [Sign up here](https://hub.docker.com/signup).
 
+$~$
+$~$
 
 ### Step 2: Clone the Repository
 Open Terminal on Windows or Bash on Mac or Linux:
@@ -75,6 +84,8 @@ UKB-Extract/
 > [!CAUTION]
 > **NOTE**: DO NOT CHANGE ANY OF THE FILE NAMES AS IT WILL BREAK THE PROCESS.
 
+$~$
+$~$
 
 ### Step 3: Edit `script.R` ✏️
 Open `script.R` in RStudio or a text editor (Notepad, VSCode, etc.). You will need to modify the following lines:
@@ -117,6 +128,8 @@ To get the **record_id**:
 
 You can now save the `script.R` code.
 
+$~$
+$~$
 
 ### Step 4: Edit `run_script.sh` ✏️
 Open `run_script.sh` with a plain text editor (e.g., Notepad on Windows):
@@ -165,6 +178,8 @@ Go to **File > Save As**.
 - Name the file with a `.sh` extension, e.g., `script.sh`.
 - Ensure the encoding is set to **UTF-8** and save it to your desired location. **This is an incredibly important step. If you don't choose UTF-8, it will not work.** 
 
+$~$
+$~$
 
 ### Step 5: Build Docker Image 🐳
 Ensure Docker Desktop is running and you're logged in. In the terminal on Windows and bash on Mac or Linux, navigate to the repository location, which is  and run:
@@ -186,6 +201,8 @@ Example:
 docker push chonkie/ukb-extract:latest
 ```
 
+$~$
+$~$
 
 ### Step 6: Run Swiss Army Knife to Extract Data
 Finally: 🔑
@@ -205,7 +222,8 @@ Finally: 🔑
 
 Once finished, it should show **Complete**, and your file should pop up at the output location you specified for **Swiss Army Knife**.
 
-
+$~$
+$~$
 
 ## Conclusion
 Congratulations on completing the setup! If you have any trouble, feel free to reach out. Please share if you find this helpful!
