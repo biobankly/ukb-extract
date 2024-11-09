@@ -6,7 +6,7 @@ This repository is a step-by-step guide for anyone, regardless of computer, Linu
 There are two main ways to pull phenotype data from the UK Biobank:
 
 1. **Table Extract (GUI method)** - This method can be challenging, even though it is meant to be straightforward.
-![#1589F0]2. **Docker & R with Glue** - This is the method detailed in this repository. `#1589F0`
+-![#1589F0]2. **Docker & R with Glue** - This is the method detailed in this repository. `#1589F0`
 
 To get started, you'll need to create a `field_list.txt` file to specify the columns (fields) you need. Eventually, there will be another repository to help you create this file, along with one to batch pull the entire phenotype dataset.
 
