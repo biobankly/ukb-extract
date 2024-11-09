@@ -5,7 +5,6 @@
 This repository is a step-by-step guide for anyone, regardless of computer, Linux, or platform experience, to easily extract phenotype data from the UK Biobank. This guide covers using Docker and R with Glue, offering a clear alternative to using the Table Extract GUI. 
 
 <br/>
-<br/>
 
 ## Overview
 There are two main ways to pull phenotype data from the UK Biobank:
@@ -32,7 +31,6 @@ Example: `p4080_i0_a2` means field ID 4080, the first visit (i0), and the third 
 More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?cd=data_field).
 
 <br/>
-<br/>
 
 > [!NOTE]
 > ## Prerequisites 🚀
@@ -49,18 +47,13 @@ More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?
 > 7. **Create Docker Image on Dockerhub**: You will need this to store and share your Docker image.
 
 <br/>
-<br/>
 
 ## Step-by-Step Instructions 📋
-
-<br/>
-
 
 ### Step 1: Install Docker Desktop and Create Dockerhub Username
 - Download and install Docker Desktop: [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 - Create a Dockerhub username: [Sign up here](https://hub.docker.com/signup).
 
-<br/>
 <br/>
 
 ### Step 2: Clone the Repository
@@ -85,7 +78,6 @@ UKB-Extract/
 > [!CAUTION]
 > **NOTE**: DO NOT CHANGE ANY OF THE FILE NAMES AS IT WILL BREAK THE PROCESS.
 
-<br/>
 <br/>
 
 ### Step 3: Edit `script.R` ✏️
@@ -129,7 +121,6 @@ To get the **record_id**:
 
 You can now save the `script.R` code.
 
-<br/>
 <br/>
 
 ### Step 4: Edit `run_script.sh` ✏️
@@ -180,7 +171,6 @@ Go to **File > Save As**.
 - Ensure the encoding is set to **UTF-8** and save it to your desired location. **This is an incredibly important step. If you don't choose UTF-8, it will not work.** 
 
 <br/>
-<br/>
 
 ### Step 5: Build Docker Image 🐳
 Ensure Docker Desktop is running and you're logged in. In the terminal on Windows and bash on Mac or Linux, navigate to the repository location, which is  and run:
@@ -201,8 +191,6 @@ Example:
 ```sh
 docker push chonkie/ukb-extract:latest
 ```
-
-<br/>
 <br/>
 
 ### Step 6: Run Swiss Army Knife to Extract Data
@@ -223,7 +211,6 @@ Finally: 🔑
 
 Once finished, it should show **Complete**, and your file should pop up at the output location you specified for **Swiss Army Knife**.
 
-<br/>
 <br/>
 
 ## Conclusion
