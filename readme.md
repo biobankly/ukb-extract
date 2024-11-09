@@ -24,19 +24,19 @@ Example: `p4080_i0_a2` means field ID 4080, the first visit (i0), and the third 
 
 More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?cd=data_field).
 
-[!NOTE]
-## Prerequisites
-1. **Access to UK Biobank Nexus**: [UK Biobank DNAnexus](https://ukbiobank.dnanexus.com/).
-2. **UK Biobank Project**: An accepted project linked to your Nexus account.
-3. **Level I UK Biobank Access** or above.
-4. **Git Installation**: Install Git on Windows, Linux, or Mac.
-    - **Windows**: Download the Git installer from [Git for Windows](https://gitforwindows.org/). Run the installer and follow the on-screen instructions, ensuring you select "Git Bash Here" during the installation process. Once installed, you can open Git Bash from the Start menu.
-    - **Mac**: Run `brew install git` in Terminal.
-    - **Linux**: Run `sudo apt install git` in Terminal.
-5. **Docker Desktop**: [Download Docker Desktop](https://www.docker.com/products/docker-desktop/).
-   - Docker Desktop must be running when you run the code.
-6. **Dockerhub Username**: [Create an account here](https://hub.docker.com/signup).
-7. **Create Docker Image on Dockerhub**: You will need this to store and share your Docker image.
+> [!NOTE]
+> ## Prerequisites
+> 1. **Access to UK Biobank Nexus**: [UK Biobank DNAnexus](https://ukbiobank.dnanexus.com/).
+> 2. **UK Biobank Project**: An accepted project linked to your Nexus account.
+> 3. **Level I UK Biobank Access** or above.
+> 4. **Git Installation**: Install Git on Windows, Linux, or Mac.
+>     - **Windows**: Download the Git installer from [Git for Windows](https://gitforwindows.org/). Run the installer and follow the on-screen instructions, ensuring you select "Git Bash Here" during the installation process. Once installed, you can open Git Bash from the Start menu.
+>     - **Mac**: Run `brew install git` in Terminal.
+>     - **Linux**: Run `sudo apt install git` in Terminal.
+> 5. **Docker Desktop**: [Download Docker Desktop](https://www.docker.com/products/docker-desktop/).
+>    - Docker Desktop must be running when you run the code.
+> 6. **Dockerhub Username**: [Create an account here](https://hub.docker.com/signup).
+> 7. **Create Docker Image on Dockerhub**: You will need this to store and share your Docker image.
 
 ## Step-by-Step Instructions
 
@@ -63,8 +63,8 @@ UKB-Extract/
 └── run_script.sh  # Script to be edited later
 └── script.R  # Script to be edited later
 ```
-[!CAUTION]
-**NOTE**: DO NOT CHANGE ANY OF THE FILE NAMES AS IT WILL BREAK THE PROCESS.
+> [!CAUTION]
+> **NOTE**: DO NOT CHANGE ANY OF THE FILE NAMES AS IT WILL BREAK THE PROCESS.
 
 ### Step 3: Edit `script.R`
 Open `script.R` in RStudio or a text editor (Notepad, VSCode, etc.). You will need to modify the following lines:
@@ -142,8 +142,8 @@ Replace the `your_token_here` part in the `run_script.sh` file:
 ```sh
 export DX_SECURITY_CONTEXT='{"auth_token_type": "Bearer", "auth_token": "XXXXXXX"}'
 ```
-[!CAUTION]
-**Now save the file: and very important for Windows users!! Remember to save it as UTF-8, otherwise it won't work.**
+> [!CAUTION]
+> **Now save the file: and very important for Windows users!! Remember to save it as UTF-8, otherwise it won't work.**
 
 Go to **File > Save As**.
 - Select **All Files (*.*)** as the file type.
