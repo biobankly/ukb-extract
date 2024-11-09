@@ -6,7 +6,7 @@ This repository is a step-by-step guide for anyone, regardless of computer, Linu
 There are two main ways to pull phenotype data from the UK Biobank:
 
 1. **Table Extract (GUI method)** - This method can be challenging, even though it is meant to be straightforward.
--![#1589F0]2. **Docker & R with Glue** - This is the method detailed in this repository. `#1589F0`
+2. **Docker & R with Glue** - This is the method detailed in this repository.
 
 To get started, you'll need to create a `field_list.txt` file to specify the columns (fields) you need. Eventually, there will be another repository to help you create this file, along with one to batch pull the entire phenotype dataset.
 
@@ -24,6 +24,7 @@ Example: `p4080_i0_a2` means field ID 4080, the first visit (i0), and the third 
 
 More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?cd=data_field).
 
+[!NOTE]
 ## Prerequisites
 1. **Access to UK Biobank Nexus**: [UK Biobank DNAnexus](https://ukbiobank.dnanexus.com/).
 2. **UK Biobank Project**: An accepted project linked to your Nexus account.
@@ -62,7 +63,8 @@ UKB-Extract/
 └── run_script.sh  # Script to be edited later
 └── script.R  # Script to be edited later
 ```
-![#f03c15]**NOTE**: DO NOT CHANGE ANY OF THE FILE NAMES AS IT WILL BREAK THE PROCESS. `#f03c15`
+[!CAUTION]
+**NOTE**: DO NOT CHANGE ANY OF THE FILE NAMES AS IT WILL BREAK THE PROCESS.
 
 ### Step 3: Edit `script.R`
 Open `script.R` in RStudio or a text editor (Notepad, VSCode, etc.). You will need to modify the following lines:
@@ -140,13 +142,13 @@ Replace the `your_token_here` part in the `run_script.sh` file:
 ```sh
 export DX_SECURITY_CONTEXT='{"auth_token_type": "Bearer", "auth_token": "XXXXXXX"}'
 ```
-
-![#f03c15] **Now save the file: and very important for Windows users!! Remember to save it as UTF-8, otherwise it won't work.** `#f03c15`
+[!CAUTION]
+**Now save the file: and very important for Windows users!! Remember to save it as UTF-8, otherwise it won't work.**
 
 Go to **File > Save As**.
 - Select **All Files (*.*)** as the file type.
 - Name the file with a `.sh` extension, e.g., `script.sh`.
-- Ensure the encoding is set to **UTF-8** and save it to your desired location. ![#f03c15] **This is an incredibly important step. If you don't choose UTF-8, it will not work.** `#f03c15`
+- Ensure the encoding is set to **UTF-8** and save it to your desired location. **This is an incredibly important step. If you don't choose UTF-8, it will not work.** 
 
 ### Step 5: Build Docker Image
 Ensure Docker Desktop is running and you're logged in. In the terminal on Windows and bash on Mac or Linux, navigate to the repository location, which is  and run:
