@@ -3,7 +3,8 @@
 
 This repository is a step-by-step guide for anyone, regardless of computer, Linux, or platform experience, to easily extract phenotype data from the UK Biobank. This guide covers using Docker and R with Glue, offering a clear alternative to using the Table Extract GUI. 
 
-
+$~$
+$~$
 ## Overview
 There are two main ways to pull phenotype data from the UK Biobank:
 
