@@ -1,9 +1,9 @@
 <img src="/images/uk_biobank.png" alt="UK Biobank Logo" width="200" align="right">
+<br/>
 
 # UK Biobank Phenotype Data Extractor
 This repository is a step-by-step guide for anyone, regardless of computer, Linux, or platform experience, to easily extract phenotype data from the UK Biobank. This guide covers using Docker and R with Glue, offering a clear alternative to using the Table Extract GUI. 
 
-<br/>
 <br/>
 <br/>
 
@@ -33,7 +33,6 @@ More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?
 
 <br/>
 <br/>
-<br/>
 
 > [!NOTE]
 > ## Prerequisites 🚀
@@ -51,19 +50,16 @@ More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?
 
 <br/>
 <br/>
-<br/>
 
 ## Step-by-Step Instructions 📋
 
 <br/>
-<br/>
-<br/>
+
 
 ### Step 1: Install Docker Desktop and Create Dockerhub Username
 - Download and install Docker Desktop: [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 - Create a Dockerhub username: [Sign up here](https://hub.docker.com/signup).
 
-<br/>
 <br/>
 <br/>
 
@@ -89,7 +85,6 @@ UKB-Extract/
 > [!CAUTION]
 > **NOTE**: DO NOT CHANGE ANY OF THE FILE NAMES AS IT WILL BREAK THE PROCESS.
 
-<br/>
 <br/>
 <br/>
 
@@ -134,7 +129,6 @@ To get the **record_id**:
 
 You can now save the `script.R` code.
 
-<br/>
 <br/>
 <br/>
 
@@ -187,7 +181,6 @@ Go to **File > Save As**.
 
 <br/>
 <br/>
-<br/>
 
 ### Step 5: Build Docker Image 🐳
 Ensure Docker Desktop is running and you're logged in. In the terminal on Windows and bash on Mac or Linux, navigate to the repository location, which is  and run:
@@ -211,7 +204,6 @@ docker push chonkie/ukb-extract:latest
 
 <br/>
 <br/>
-<br/>
 
 ### Step 6: Run Swiss Army Knife to Extract Data
 Finally: 🔑
@@ -231,7 +223,6 @@ Finally: 🔑
 
 Once finished, it should show **Complete**, and your file should pop up at the output location you specified for **Swiss Army Knife**.
 
-<br/>
 <br/>
 <br/>
 
