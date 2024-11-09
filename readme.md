@@ -1,6 +1,8 @@
+![UK Biobank Logo](/images/uk_biobank.png)
 # UK Biobank Phenotype Data Extractor
 
 This repository is a step-by-step guide for anyone, regardless of computer, Linux, or platform experience, to easily extract phenotype data from the UK Biobank. This guide covers using Docker and R with Glue, offering a clear alternative to using the Table Extract GUI. 
+
 
 ## Overview
 There are two main ways to pull phenotype data from the UK Biobank:
@@ -26,8 +28,9 @@ Example: `p4080_i0_a2` means field ID 4080, the first visit (i0), and the third 
 
 More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?cd=data_field).
 
+
 > [!NOTE]
-> ## Prerequisites
+> ## Prerequisites 🚀
 > 1. **Access to UK Biobank Nexus**: [UK Biobank DNAnexus](https://ukbiobank.dnanexus.com/).
 > 2. **UK Biobank Project**: An accepted project linked to your Nexus account.
 > 3. **Level I UK Biobank Access** or above.
@@ -40,11 +43,14 @@ More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?
 > 6. **Dockerhub Username**: [Create an account here](https://hub.docker.com/signup).
 > 7. **Create Docker Image on Dockerhub**: You will need this to store and share your Docker image.
 
-## Step-by-Step Instructions
+
+## Step-by-Step Instructions 📋
+
 
 ### Step 1: Install Docker Desktop and Create Dockerhub Username
 - Download and install Docker Desktop: [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 - Create a Dockerhub username: [Sign up here](https://hub.docker.com/signup).
+
 
 ### Step 2: Clone the Repository
 Open Terminal on Windows or Bash on Mac or Linux:
@@ -68,7 +74,8 @@ UKB-Extract/
 > [!CAUTION]
 > **NOTE**: DO NOT CHANGE ANY OF THE FILE NAMES AS IT WILL BREAK THE PROCESS.
 
-### Step 3: Edit `script.R`
+
+### Step 3: Edit `script.R` ✏️
 Open `script.R` in RStudio or a text editor (Notepad, VSCode, etc.). You will need to modify the following lines:
 
 ```r
@@ -110,7 +117,7 @@ To get the **record_id**:
 You can now save the `script.R` code.
 
 
-### Step 4: Edit `run_script.sh`
+### Step 4: Edit `run_script.sh` ✏️
 Open `run_script.sh` with a plain text editor (e.g., Notepad on Windows):
 
 ```sh
@@ -157,7 +164,8 @@ Go to **File > Save As**.
 - Name the file with a `.sh` extension, e.g., `script.sh`.
 - Ensure the encoding is set to **UTF-8** and save it to your desired location. **This is an incredibly important step. If you don't choose UTF-8, it will not work.** 
 
-### Step 5: Build Docker Image
+
+### Step 5: Build Docker Image 🐳
 Ensure Docker Desktop is running and you're logged in. In the terminal on Windows and bash on Mac or Linux, navigate to the repository location, which is  and run:
 
 ```sh
@@ -177,8 +185,9 @@ Example:
 docker push chonkie/ukb-extract:latest
 ```
 
+
 ### Step 6: Run Swiss Army Knife to Extract Data
-Finally:
+Finally: 🔑
 1. Log into the DNAnexus Biobank [https://ukbiobank.dnanexus.com/](https://ukbiobank.dnanexus.com/).
 2. At the top, click on **Tools** and select **Tools Library**.
 3. Scroll down to an app or tool called **Swiss Army Knife**.
@@ -191,9 +200,10 @@ Finally:
 10. Choose your criteria and your compute specifications, just ignore if you are unsure.
 11. Click **Launch Analysis**.
 
-Your job should now be viewable in the **Monitor** tab when you click **Projects**. Depending on your `field_list.txt` file size, it might take some time to create the file.
+✅ Your job should now be viewable in the **Monitor** tab when you click **Projects**. Depending on your `field_list.txt` file size, it might take some time to create the file.
 
 Once finished, it should show **Complete**, and your file should pop up at the output location you specified for **Swiss Army Knife**.
+
 
 
 ## Conclusion
