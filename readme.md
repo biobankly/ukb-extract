@@ -13,14 +13,14 @@ To get started, you'll need to create a `field_list.txt` file to specify the col
 The UK Biobank field format follows this structure:
 
 ```
-p.[31m<FIELD-ID>[0m_i[34m<INSTANCE-ID>[0m_a[32m<ARRAY-ID>[0m
+p.<FIELD-ID>_i<INSTANCE-ID>_a<ARRAY-ID>
 ```
 
-- **FIELD-ID**: [31mA unique ID for a feature (e.g., ALT liver blood marker).[0m
-- **INSTANCE-ID**: [34mA number between 0-3 indicating the participant's visit (1st-4th).[0m
-- **ARRAY-ID**: [32mA number (0-X) indicating the specific draw.[0m
+- **FIELD-ID**: A unique ID for a feature (e.g., ALT liver blood marker).
+- **INSTANCE-ID**: A number between 0-3 indicating the participant's visit (1st-4th).
+- **ARRAY-ID**: A number (0-X) indicating the specific draw.
 
-Example: `[31mp4080[0m_[34mi0[0m_[32ma2[0m` means field ID [31m4080[0m, the first visit ([34mi0[0m), and the third draw ([32ma2[0m).
+Example: `p4080_i0_a2` means field ID 4080, the first visit (i0), and the third draw (a2).
 
 More information can be found [here](https://biobank.ndph.ox.ac.uk/ukb/help.cgi?cd=data_field).
 
@@ -51,13 +51,13 @@ git clone https://github.com/UKBSidekick/ukb-extract.git
 This will pull the repository onto your local machine. The resulting file structure should look like:
 
 ```
-Root
-- Dockerfile
-- field_list.txt  # This file contains your selected fields
-- field_list_long.txt  # Contains all available fields in UK Biobank; feel free to filter and use as needed
-- readme.md  # This README file
-- run_script.sh  # Script to be edited later
-- script.R  # Script to be edited later
+Root/
+└── Dockerfile
+└── field_list.txt  # This file contains your selected fields
+└── field_list_long.txt  # Contains all available fields in UK Biobank; feel free to filter and use as needed
+└── readme.md  # This README file
+└── run_script.sh  # Script to be edited later
+└── script.R  # Script to be edited later
 ```
 **Note**: Do not change any of the file names as it will break the process.
 
