@@ -8,9 +8,11 @@ There are two main ways to pull phenotype data from the UK Biobank:
 1. **Table Extract (GUI method)** - This method can be challenging, even though it is meant to be straightforward.
 2. **Docker & R with Glue** - This is the method detailed in this repository.
 
-To get started, you'll need to create a `field_list.txt` file to specify the columns (fields) you need. Eventually, there will be another repository to help you create this file, along with one to batch pull the entire phenotype dataset.
+> [!IMPORTANT]
+> To get started, you'll need to create a `field_list.txt` file to specify the columns (fields) you need. Eventually, there will be another repository to help you create this file, along with one to batch pull the entire phenotype dataset.
 
-The UK Biobank field format follows this structure:
+> [!TIP]
+> The UK Biobank field format follows this structure:
 
 ```
 p.<FIELD-ID>_i<INSTANCE-ID>_a<ARRAY-ID>
@@ -140,8 +142,13 @@ Once your token is generated, you can copy it. **REMEMBER**, once you close this
 Replace the `your_token_here` part in the `run_script.sh` file:
 
 ```sh
-export DX_SECURITY_CONTEXT='{"auth_token_type": "Bearer", "auth_token": "XXXXXXX"}'
+export DX_SECURITY_CONTEXT='{"auth_token_type": "Bearer", "auth_token": "your_token_here"}'
 ```
+Example:
+```sh
+export DX_SECURITY_CONTEXT='{"auth_token_type": "Bearer", "auth_token": "XXXXxxxXXXxxxXX"}'
+```
+
 > [!CAUTION]
 > **Now save the file: and very important for Windows users!! Remember to save it as UTF-8, otherwise it won't work.**
 
@@ -188,7 +195,6 @@ Your job should now be viewable in the **Monitor** tab when you click **Projects
 
 Once finished, it should show **Complete**, and your file should pop up at the output location you specified for **Swiss Army Knife**.
 
-**DONE!**
 
 ## Conclusion
 Congratulations on completing the setup! If you have any trouble, feel free to reach out. Please share if you find this helpful!
