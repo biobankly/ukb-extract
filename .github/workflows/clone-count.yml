@@ -21,14 +21,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Initialize clone.json
+      - name: Fetch traffic data and initialize clone.json
         run: |
-          if [ ! -f clone.json ]; then
-            curl -H "Authorization: token $GITHUB_TOKEN" \
-                 -H "Accept: application/vnd.github.v3+json" \
-                 https://api.github.com/repos/${GITHUB_REPOSITORY}/traffic/clones \
-                 -o clone.json
-          fi
+          curl -H "Authorization: token $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               https://api.github.com/repos/${GITHUB_REPOSITORY}/traffic/clones \
+               -o clone.json
+          echo "Clones fetched from GitHub API:"
+          cat clone.json
         env:
           GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
 
