@@ -5,43 +5,32 @@ def debug_log(message):
     """Print debug messages for GitHub Actions log."""
     print(f"::debug::{message}")
 
-# Load current clone data from the GitHub API
-if os.path.exists("current_clones.json"):
-    debug_log("Loading current_clones.json fetched from GitHub API.")
-    with open("current_clones.json", "r") as fh:
-        now = json.load(fh)
-else:
-    debug_log("current_clones.json not found. Exiting script.")
-    raise FileNotFoundError("current_clones.json not found. Ensure it exists before running the script.")
-
-# Load previous clone data from clone.json
-if os.path.exists("clone.json"):
-    debug_log("Loading clone.json.")
+# Load clone.json, which contains the API response
+try:
     with open("clone.json", "r") as fh:
-        before = json.load(fh)
-else:
-    debug_log("clone.json not found. Exiting script.")
-    raise FileNotFoundError("clone.json not found. Ensure it exists in the repository.")
+        now = json.load(fh)
+except (FileNotFoundError, json.JSONDecodeError):
+    debug_log("Failed to load or decode clone.json. Initializing new data structure.")
+    now = {"clones": [], "count": 0, "uniques": 0}
 
-# Build a dictionary of timestamps from the previous data
-timestamps = {before['clones'][i]['timestamp']: i for i in range(len(before['clones']))}
-debug_log(f"Existing timestamps: {timestamps}")
+# Validate structure of clone.json
+if "clones" not in now:
+    debug_log("No 'clones' key found in clone.json. Initializing as empty list.")
+    now["clones"] = []
 
-# Merge current clone data with previous data
-latest = dict(before)
-for i in range(len(now['clones'])):
-    timestamp = now['clones'][i]['timestamp']
-    if timestamp in timestamps:
-        latest['clones'][timestamps[timestamp]] = now['clones'][i]
-    else:
-        latest['clones'].append(now['clones'][i])
+# Aggregate clone data
+timestamps = {entry["timestamp"]: entry for entry in now["clones"]}
+debug_log(f"Current timestamps: {timestamps}")
 
-# Update count and uniques
-latest['count'] = sum(map(lambda x: int(x['count']), latest['clones']))
-latest['uniques'] = sum(map(lambda x: int(x['uniques']), latest['clones']))
-debug_log(f"Updated counts: Total - {latest['count']}, Uniques - {latest['uniques']}")
+# Merge and update counts
+total_clones = sum(entry["count"] for entry in now["clones"])
+unique_clones = sum(entry["uniques"] for entry in now["clones"])
+now["count"] = total_clones
+now["uniques"] = unique_clones
 
-# Save updated data to clone.json
-debug_log("Saving updated clone data to clone.json.")
+debug_log(f"Updated counts: Total - {now['count']}, Uniques - {now['uniques']}")
+
+# Save the updated clone.json
 with open("clone.json", "w", encoding="utf-8") as fh:
-    json.dump(latest, fh, ensure_ascii=False, indent=4)
+    json.dump(now, fh, ensure_ascii=False, indent=4)
+debug_log("Saved updated clone.json.")
