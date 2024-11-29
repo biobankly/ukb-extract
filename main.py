@@ -1,28 +1,41 @@
 import json
 import os
 
-# Ensure clone_before.json exists or initialize it
+def debug_log(message):
+    """Print debug messages for GitHub Actions log."""
+    print(f"::debug::{message}")
+
+# Check for clone_before.json or initialize
 if os.path.exists('clone_before.json'):
+    debug_log("Loading clone_before.json.")
     with open('clone_before.json', 'r') as fh:
         before = json.load(fh)
 else:
+    debug_log("clone_before.json not found. Initializing new data structure.")
     before = {"clones": [], "count": 0, "uniques": 0}
 
-# Ensure clone.json exists or initialize it
-try:
+# Check for clone.json or exit with error
+if os.path.exists('clone.json'):
+    debug_log("Loading clone.json.")
     with open('clone.json', 'r') as fh:
-        now = json.load(fh)
-except (json.JSONDecodeError, FileNotFoundError):
-    now = {"clones": []}
+        try:
+            now = json.load(fh)
+        except json.JSONDecodeError:
+            debug_log("Error decoding clone.json. Initializing as empty.")
+            now = {"clones": []}
+else:
+    debug_log("clone.json not found. Exiting script.")
+    raise FileNotFoundError("clone.json not found. Ensure it exists before running the script.")
 
 # Validate structure of now
 if "clones" not in now:
+    debug_log("No 'clones' key found in clone.json. Initializing as empty list.")
     now["clones"] = []
 
-# Build a dictionary of timestamps from the previous data
+# Merge data
 timestamps = {before['clones'][i]['timestamp']: i for i in range(len(before['clones']))}
+debug_log(f"Existing timestamps: {timestamps}")
 
-# Merge current clone data with previous data
 latest = dict(before)
 for i in range(len(now['clones'])):
     timestamp = now['clones'][i]['timestamp']
@@ -34,9 +47,11 @@ for i in range(len(now['clones'])):
 # Update count and uniques
 latest['count'] = sum(map(lambda x: int(x['count']), latest['clones']))
 latest['uniques'] = sum(map(lambda x: int(x['uniques']), latest['clones']))
+debug_log(f"Updated counts: Total - {latest['count']}, Uniques - {latest['uniques']}")
 
-# Compress old data to reduce size
+# Compress old data
 if len(timestamps) > 100:
+    debug_log("Compressing old data to reduce size.")
     remove_this = []
     clones = latest['clones']
     for i in range(len(timestamps) - 35):
@@ -49,6 +64,7 @@ if len(timestamps) > 100:
     for item in remove_this:
         clones.remove(item)
 
-# Save the updated clone data to clone.json
+# Save updated data to clone.json
+debug_log("Saving updated clone data to clone.json.")
 with open('clone.json', 'w', encoding='utf-8') as fh:
     json.dump(latest, fh, ensure_ascii=False, indent=4)
