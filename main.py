@@ -1,16 +1,23 @@
 import json
 import os
 
-# Check if clone_before.json exists, otherwise create an empty structure
+# Ensure clone_before.json exists or initialize it
 if os.path.exists('clone_before.json'):
     with open('clone_before.json', 'r') as fh:
         before = json.load(fh)
 else:
     before = {"clones": [], "count": 0, "uniques": 0}
 
-# Read current clone.json data
-with open('clone.json', 'r') as fh:
-    now = json.load(fh)
+# Ensure clone.json exists or initialize it
+try:
+    with open('clone.json', 'r') as fh:
+        now = json.load(fh)
+except (json.JSONDecodeError, FileNotFoundError):
+    now = {"clones": []}
+
+# Validate structure of now
+if "clones" not in now:
+    now["clones"] = []
 
 # Build a dictionary of timestamps from the previous data
 timestamps = {before['clones'][i]['timestamp']: i for i in range(len(before['clones']))}
@@ -45,4 +52,3 @@ if len(timestamps) > 100:
 # Save the updated clone data to clone.json
 with open('clone.json', 'w', encoding='utf-8') as fh:
     json.dump(latest, fh, ensure_ascii=False, indent=4)
-
