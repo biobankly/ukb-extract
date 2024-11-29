@@ -1,36 +1,36 @@
 import json
-import os
 
-def debug_log(message):
-    """Print debug messages for GitHub Actions log."""
-    print(f"::debug::{message}")
+with open('clone.json', 'r') as fh:
+    now = json.load(fh)
 
-# Load clone.json, which contains the API response
-try:
-    with open("clone.json", "r") as fh:
-        now = json.load(fh)
-except (FileNotFoundError, json.JSONDecodeError):
-    debug_log("Failed to load or decode clone.json. Initializing new data structure.")
-    now = {"clones": [], "count": 0, "uniques": 0}
+with open('clone_before.json', 'r') as fh:
+    before = json.load(fh)
+timestamps = {before['clones'][i]['timestamp']: i for i in range(len(before['clones']))}
 
-# Validate structure of clone.json
-if "clones" not in now:
-    debug_log("No 'clones' key found in clone.json. Initializing as empty list.")
-    now["clones"] = []
+latest = dict(before)
+for i in range(len(now['clones'])):
+    timestamp = now['clones'][i]['timestamp']
+    if timestamp in timestamps:
+        latest['clones'][timestamps[timestamp]] = now['clones'][i]
+    else:
+        latest['clones'].append(now['clones'][i])
 
-# Aggregate clone data
-timestamps = {entry["timestamp"]: entry for entry in now["clones"]}
-debug_log(f"Current timestamps: {timestamps}")
 
-# Merge and update counts
-total_clones = sum(entry["count"] for entry in now["clones"])
-unique_clones = sum(entry["uniques"] for entry in now["clones"])
-now["count"] = total_clones
-now["uniques"] = unique_clones
+latest['count'] = sum(map(lambda x: int(x['count']), latest['clones']))
+latest['uniques'] = sum(map(lambda x: int(x['uniques']), latest['clones']))
 
-debug_log(f"Updated counts: Total - {now['count']}, Uniques - {now['uniques']}")
+if len(timestamps) > 100:
+    remove_this = []
+    clones = latest['clones']
+    for i in range(len(timestamps) - 35):
+        clones[i]['timestamp'] = clones[i]['timestamp'][:7] 
+        if clones[i]['timestamp'] == clones[i+1]['timestamp'][:7]:
+            clones[i+1]['count'] +=  clones[i]['count']
+            clones[i+1]['uniques'] +=  clones[i]['uniques']
+            remove_this.append(clones[i])
 
-# Save the updated clone.json
-with open("clone.json", "w", encoding="utf-8") as fh:
-    json.dump(now, fh, ensure_ascii=False, indent=4)
-debug_log("Saved updated clone.json.")
+    for item in remove_this:
+        clones.remove(item)
+
+with open('clone.json', 'w', encoding='utf-8') as fh:
+    json.dump(latest, fh, ensure_ascii=False, indent=4)
