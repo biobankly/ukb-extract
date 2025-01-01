@@ -1,21 +1,23 @@
 name: Update Copyright Year
 
+permissions:
+  contents: write
+  pull-requests: write
+
 on:
   schedule:
-    - cron: '0 0 1 1 *'  # Runs on January 1st every year
-  workflow_dispatch:      # Allow manual trigger
+    - cron: '0 0 1 1 *' # Runs on January 1st every year
+  workflow_dispatch:
 
 jobs:
   update-copyright:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
       - name: Update copyright year
         run: |
           YEAR=$(date +%Y)
           find . -type f -name "LICENSE*" -exec sed -i "s/Copyright (c) [0-9]\{4\}/Copyright (c) ${YEAR}/" {} +
-          
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
